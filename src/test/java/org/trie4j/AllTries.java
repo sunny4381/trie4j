@@ -205,9 +205,10 @@ public class AllTries {
 								long ms = lt.lapMillis();
 								return Pair.create((Trie)ret, ms);
 							}
-						} catch(InstantiationException | IllegalAccessException |
-								SecurityException |
-								IllegalArgumentException | InvocationTargetException e){
+						} catch(IllegalAccessException  e){
+						} catch(SecurityException e){
+						} catch(IllegalArgumentException e){
+						} catch(InvocationTargetException e){
 						}
 					}
 					throw new RuntimeException("no suitable constructor.");
@@ -237,8 +238,10 @@ public class AllTries {
 						if(consumer != null) consumer.consume(trie);
 						return Pair.create(trie, b / 1000000);
 					}
-				} catch(InstantiationException | IllegalAccessException |
-						IllegalArgumentException | InvocationTargetException e){
+				} catch(InstantiationException e){
+				} catch(IllegalAccessException  e){
+				} catch(IllegalArgumentException e){
+				} catch(InvocationTargetException e){
 				}
 			}
 			throw new RuntimeException("no suitable constructor.");
@@ -303,9 +306,11 @@ public class AllTries {
 								long ms = lt.lapMillis();
 								return Pair.create((MapTrie)ret, ms);
 							}
-						} catch(InstantiationException | IllegalAccessException |
-								SecurityException |
-								IllegalArgumentException | InvocationTargetException e){
+						} catch(InstantiationException e){
+						} catch(IllegalAccessException  e){
+						} catch(SecurityException e){
+						} catch(IllegalArgumentException e){
+						} catch(InvocationTargetException e){
 						}
 					}
 					throw new RuntimeException("no suitable constructor.");
@@ -340,8 +345,10 @@ public class AllTries {
 						if(consumer != null) consumer.consume(trie);
 						return Pair.create((MapTrie)trie, b / 1000000);
 					}
-				} catch(InstantiationException | IllegalAccessException |
-						IllegalArgumentException | InvocationTargetException e){
+				} catch(InstantiationException e){
+				} catch(IllegalAccessException  e){
+				} catch(IllegalArgumentException e){
+				} catch(InvocationTargetException e){
 				}
 			}
 			throw new RuntimeException("no suitable constructor.");

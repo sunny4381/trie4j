@@ -47,9 +47,9 @@ public class TailLOUDSPPTrieWithSuffixTrieTailArrayTest extends AbstractTermIdTr
 		Trie trie = new PatriciaTrie();
 		for(String w : words) trie.insert(w);
 		TailLOUDSPPTrie lt = new TailLOUDSPPTrie(trie);
-		try(
-				ByteArrayOutputStream baos = new ByteArrayOutputStream();
-				ObjectOutputStream oos = new ObjectOutputStream(baos)){
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		ObjectOutputStream oos = new ObjectOutputStream(baos);
+		try {
 			lt.writeExternal(oos);
 			oos.flush();
 			lt = new TailLOUDSPPTrie();
@@ -58,6 +58,8 @@ public class TailLOUDSPPTrieWithSuffixTrieTailArrayTest extends AbstractTermIdTr
 				Assert.assertTrue(lt.contains(w));
 			}
 			Assert.assertFalse(lt.contains("おやすみなさい"));
+		} finally {
+			oos.close();
 		}
 
 		StringBuilder b = new StringBuilder();
