@@ -36,7 +36,7 @@ import org.trie4j.util.Trio;
 
 public class AllTries {
 	private static Iterable<String> newWords() throws IOException{
-		return new WikipediaTitles();
+		return WikipediaTitles.instance();
 	}
 
 	private static String createName(Class<?> trieClass, Class<?>... ctorParamClasses){

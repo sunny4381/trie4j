@@ -15,13 +15,28 @@ import org.trie4j.MapTrie;
 import org.trie4j.Trie;
 
 public class WikipediaTitles implements Iterable<String>{
-	public WikipediaTitles(String gzFilePath) throws IOException{
-		if(!new File(gzFilePath).exists()) throw new FileNotFoundException(gzFilePath);
-		this.path = gzFilePath;
+	private static final WikipediaTitles INSTANCE;
+
+	static {
+		WikipediaTitles instance;
+		try {
+			instance = new WikipediaTitles();
+		} catch (IOException e) {
+			instance = null;
+		}
+		INSTANCE = instance;
+	}
+
+	public static WikipediaTitles instance() {
+		return INSTANCE;
 	}
 
 	public WikipediaTitles() throws IOException{
-		String gzFilePath = "data/" + IOUtil.readLine("data/wiki");
+		this("wiki");
+	}
+
+	public WikipediaTitles(String resourcePath) throws IOException{
+		String gzFilePath = "data/" + IOUtil.readLineFromResource(resourcePath);
 		if(!new File(gzFilePath).exists()) throw new FileNotFoundException(gzFilePath);
 		this.path = gzFilePath;
 	}

@@ -173,7 +173,11 @@ public class MultilayerPatriciaTrie extends AbstractTrie implements Trie{
 		if(labelTrie != null){
 			throw new IllegalStateException("insert after pack is not supported.");
 		}
+		if (contains(text)) return;
 		char[] letters = text.toCharArray();
+		if (letters.length == 0) {
+			throw new IllegalArgumentException("empty string is not supported.");
+		}
 		if(root == null){
 			root = new TerminalCharsNode(letters);
 		} else{

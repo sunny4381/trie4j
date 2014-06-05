@@ -32,7 +32,7 @@ public class TailPatriciaTrieWithSuffixTrieTailBuilderTest extends AbstractTrieT
 		int start = 0;
 		int end = 5;
 		int i = 0;
-		for(String word : new WikipediaTitles()){
+		for(String word : WikipediaTitles.instance()){
 			if(i >= end) break;
 			if(i >= start){
 				t.insert(word);
@@ -41,7 +41,7 @@ public class TailPatriciaTrieWithSuffixTrieTailBuilderTest extends AbstractTrieT
 			i++;
 		}
 		i = 0;
-		for(String word : new WikipediaTitles()){
+		for(String word : WikipediaTitles.instance()){
 			if(i >= end) break;
 			if(i >= start) Assert.assertTrue(
 					i + "th word: " + word, t.contains(word));

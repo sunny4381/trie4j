@@ -22,9 +22,9 @@ import org.trie4j.patricia.simple.MapPatriciaTrie;
 import org.trie4j.test.LapTimer;
 import org.trie4j.test.WikipediaTitles;
 
-public class AbstractMapTrieWikipediaTest extends AbstractWikipediaTest{
-	private static final String wikipediaFilename = "data/jawiki-20140416-all-titles-in-ns0.gz";
+import static org.junit.Assume.assumeNotNull;
 
+public class AbstractMapTrieWikipediaTest extends AbstractWikipediaTest{
 	@Override
 	protected MapTrie<Integer> createFirstTrie(){
 		return new MapPatriciaTrie<Integer>();
@@ -45,12 +45,14 @@ public class AbstractMapTrieWikipediaTest extends AbstractWikipediaTest{
 
 	@Test
 	public void test() throws Exception{
+		assumeNotNull("download jawiki-20XXXXXX-all-titles-in-ns0.gz to `data` directory.",
+				WikipediaTitles.instance());
 		MapTrie<Integer> trie = createFirstTrie();
 		System.out.println("building first trie: " + trie.getClass().getName());
 		int c = 0, chars = 0;
 		long b = 0;
 		LapTimer t = new LapTimer();
-		for(String word : new WikipediaTitles(wikipediaFilename)){
+		for(String word : WikipediaTitles.instance()){
 			try{
 				t.reset();
 				trie.insert(word, c);
@@ -78,7 +80,7 @@ public class AbstractMapTrieWikipediaTest extends AbstractWikipediaTest{
 		System.out.println("verifying trie.");
 		long sum = 0;
 		c = 0;
-		for(String word : new WikipediaTitles(wikipediaFilename)){
+		for(String word : WikipediaTitles.instance()){
 			t.reset();
 			boolean found = (int)second.get(word) == c;
 			sum += t.lapNanos();

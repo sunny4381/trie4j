@@ -35,7 +35,7 @@ public class MapTailLOUDSTrieWithConcatTailArrayTest extends AbstractMapTrieTest
 		int end = 2000000;
 		int i = 0;
 		MapTrie<Integer> trie = new MapPatriciaTrie<Integer>();
-		for(String s : new WikipediaTitles()){
+		for(String s : WikipediaTitles.instance()){
 			if(i >= end){
 				break;
 			} else if(i >= start){
@@ -46,7 +46,7 @@ public class MapTailLOUDSTrieWithConcatTailArrayTest extends AbstractMapTrieTest
 		i = 0;
 		MapTailLOUDSTrie<Integer> v = new MapTailLOUDSTrie<Integer>(trie);
 //		TailLOUDSTrie tlt = (TailLOUDSTrie)v.getTrie();
-		for(String s : new WikipediaTitles()){
+		for(String s : WikipediaTitles.instance()){
 			if(i >= end){
 				break;
 			} else if(i >= start){

@@ -15,6 +15,7 @@
  */
 package org.trie4j.doublearray;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
@@ -22,21 +23,32 @@ import java.io.PrintWriter;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
 
+import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.runners.MethodSorters;
 import org.trie4j.Trie;
 import org.trie4j.test.LapTimer;
 import org.trie4j.test.WikipediaTitles;
 
+import static org.junit.Assume.assumeNotNull;
+import static org.junit.Assume.assumeTrue;
+
+/**
+ * At first you must test test001_Save().
+ */
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class TestIO {
 	private static final int maxCount = 2000000;
 	
 	@Test
-	public void testSave() throws Exception{
+	public void test001_Save() throws Exception{
+		assumeNotNull("download jawiki-20XXXXXX-all-titles-in-ns0.gz to `data` directory.",
+				WikipediaTitles.instance());
 		System.out.println("--- building patricia trie ---");
 		Trie trie = new org.trie4j.patricia.tail.TailPatriciaTrie();
 		int c = 0;
 		LapTimer t1 = new LapTimer();
-		for(String word : new WikipediaTitles()){
+		for(String word : WikipediaTitles.instance()){
 			trie.insert(word);
 			c++;
 			if(c == maxCount) break;
@@ -63,7 +75,9 @@ public class TestIO {
 	}
 
 	@Test
-	public void testLoad() throws Exception{
+	public void test002_Load() throws Exception{
+		assumeTrue("download jawiki-20XXXXXX-all-titles-in-ns0.gz to `data` directory.",
+				new File("da.dat").exists());
 		TailDoubleArray da = new TailDoubleArray();
 		LapTimer t = new LapTimer();
 		System.out.println("-- loading double array.");
@@ -95,7 +109,7 @@ public class TestIO {
 		int sum = 0;
 		LapTimer t1 = new LapTimer();
 		LapTimer t = new LapTimer();
-		for(String word : new WikipediaTitles()){
+		for(String word : WikipediaTitles.instance()){
 			if(c == maxCount) break;
 			t.reset();
 			boolean found = da.contains(word);

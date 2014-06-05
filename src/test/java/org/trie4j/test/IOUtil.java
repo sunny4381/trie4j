@@ -33,4 +33,17 @@ public class IOUtil {
 			is.close();
 		}
 	}
+
+	public static String readLineFromResource(String path)
+			throws FileNotFoundException, IOException{
+		InputStream is = ClassLoader.getSystemResourceAsStream(path);
+		try{
+			byte line[] = new byte[1026];
+			int n = is.read(line);
+			if(n == -1) throw new IOException("failed to read " + path);
+			return new String(line, 0, n, "UTF-8");
+		} finally{
+			is.close();
+		}
+	}
 }

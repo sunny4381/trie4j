@@ -35,7 +35,7 @@ public class TestWikipedia {
 //		Trie trie = new TailPatriciaTrie(new ConcatTailBuilder());
 		int c = 0;
 		LapTimer t1 = new LapTimer();
-		for(String word : new WikipediaTitles()){
+		for(String word : WikipediaTitles.instance()){
 			trie.insert(word);
 			c++;
 			if(c == maxCount) break;
@@ -88,7 +88,7 @@ public class TestWikipedia {
 		int sum = 0;
 		LapTimer t1 = new LapTimer();
 		LapTimer t = new LapTimer();
-		for(String word : new WikipediaTitles()){
+		for(String word : WikipediaTitles.instance()){
 			if(c == maxCount) break;
 			t.reset();
 			boolean found = da.contains(word);

@@ -23,6 +23,8 @@ import org.trie4j.tail.builder.ConcatTailBuilder;
 import org.trie4j.test.LapTimer;
 import org.trie4j.test.WikipediaTitles;
 
+import static org.junit.Assume.assumeNotNull;
+
 public class AbstractWikipediaTest {
 	protected Trie createFirstTrie(){
 		return new TailPatriciaTrie(new ConcatTailBuilder());
@@ -37,12 +39,14 @@ public class AbstractWikipediaTest {
 
 	@Test
 	public void test() throws Exception{
+		assumeNotNull("download jawiki-20XXXXXX-all-titles-in-ns0.gz to `data` directory.",
+				WikipediaTitles.instance());
 		Trie trie = createFirstTrie();
 		System.out.println("building first trie: " + trie.getClass().getName());
 		int c = 0, chars = 0;
 		long b = 0;
 		LapTimer t = new LapTimer();
-		for(String word : new WikipediaTitles()){
+		for(String word : WikipediaTitles.instance()){
 			try{
 				t.reset();
 				trie.insert(word);
@@ -72,7 +76,7 @@ public class AbstractWikipediaTest {
 		System.out.println("verifying trie.");
 		long sum = 0;
 		c = 0;
-		for(String word : new WikipediaTitles()){
+		for(String word : WikipediaTitles.instance()){
 			t.reset();
 			boolean found = second.contains(word);
 			sum += t.lapNanos();

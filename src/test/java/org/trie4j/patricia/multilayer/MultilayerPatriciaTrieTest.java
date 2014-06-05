@@ -15,6 +15,8 @@
  */
 package org.trie4j.patricia.multilayer;
 
+import org.junit.Assert;
+import org.junit.Test;
 import org.trie4j.AbstractTrieTest;
 import org.trie4j.Trie;
 
@@ -22,5 +24,27 @@ public class MultilayerPatriciaTrieTest extends AbstractTrieTest{
 	@Override
 	protected Trie createFirstTrie() {
 		return new MultilayerPatriciaTrie();
+	}
+
+	@Test
+	@Override
+	public void test_contains_1() throws Exception{
+		try {
+			super.test_contains_1();
+			Assert.fail("unreachable here");
+		} catch (IllegalArgumentException e) {
+			// this exception is expected.
+		}
+	}
+
+	@Test
+	@Override
+	public void test_size_5() throws Exception{
+		try {
+			super.test_size_5();
+			Assert.fail("unreachable here");
+		} catch (IllegalArgumentException e) {
+			// this exception is expected.
+		}
 	}
 }

@@ -27,6 +27,8 @@ import org.trie4j.patricia.tail.TailPatriciaTrie;
 import org.trie4j.test.LapTimer;
 import org.trie4j.test.WikipediaTitles;
 
+import static org.junit.Assume.assumeNotNull;
+
 public abstract class AbstractWikipediaSerializeTest{
 	protected Trie firstTrie(){
 		return new TailPatriciaTrie();
@@ -37,7 +39,9 @@ public abstract class AbstractWikipediaSerializeTest{
 
 	@Test
 	public void test() throws Exception{
-		WikipediaTitles wt = new WikipediaTitles();
+		assumeNotNull("download jawiki-20XXXXXX-all-titles-in-ns0.gz to `data` directory.",
+				WikipediaTitles.instance());
+		WikipediaTitles wt = WikipediaTitles.instance();
 		Trie trie = wt.insertTo(firstTrie());
 		trie = secondTrie(trie);
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();

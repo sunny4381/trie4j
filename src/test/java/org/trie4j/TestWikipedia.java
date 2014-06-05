@@ -31,7 +31,7 @@ public class TestWikipedia {
 	public static void main2(String[] args) throws Exception{
 		int base = 137320;
 		int c = 0;
-		for(String word : new WikipediaTitles()){
+		for(String word : WikipediaTitles.instance()){
 			if(c > base) System.out.println(word);
 			c++;
 			if(c == (base + 100)) break;
@@ -49,7 +49,7 @@ public class TestWikipedia {
 			int c = 0;
 			int charCount = 0;
 			long sum = 0;
-			for(String word : new WikipediaTitles()){
+			for(String word : WikipediaTitles.instance()){
 				t.reset();
 				trie.insert(word);
 				sum += t.lapMillis();
@@ -174,7 +174,7 @@ public class TestWikipedia {
 		long lap = System.currentTimeMillis();
 		int c = 0;
 		int sum = 0;
-		for(String word : new WikipediaTitles()){
+		for(String word : WikipediaTitles.instance()){
 			if(c == maxCount) break;
 			long d = System.currentTimeMillis();
 			boolean found = Algorithms.contains(trie.getRoot(), word);//trie.contains(word);

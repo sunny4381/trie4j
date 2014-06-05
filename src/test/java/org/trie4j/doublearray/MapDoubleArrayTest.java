@@ -43,12 +43,11 @@ public class MapDoubleArrayTest extends AbstractMapTrieTest{
 	}
 
 	public void investigate1() throws Exception{
-		String wikipediaFilename = "data/jawiki-20140416-all-titles-in-ns0.gz";
 		int start = 7;
 		int end = 13;
 		int i = 0;
 		MapTrie<Integer> trie = new MapPatriciaTrie<Integer>();
-		for(String s : new WikipediaTitles(wikipediaFilename)){
+		for(String s : WikipediaTitles.instance()){
 			if(i >= end){
 				break;
 			} else if(i >= start){
@@ -59,7 +58,7 @@ public class MapDoubleArrayTest extends AbstractMapTrieTest{
 		}
 		i = 0;
 		MapTrie<Integer> v = new MapDoubleArray<Integer>(trie);
-		for(String s : new WikipediaTitles(wikipediaFilename)){
+		for(String s : WikipediaTitles.instance()){
 			if(i >= end){
 				break;
 			} else if(i >= start){

@@ -34,7 +34,7 @@ public class BitVectorExp {
 		int c = 0;
 		// You can download archive from http://dumps.wikimedia.org/jawiki/latest/
 		LapTimer t = new LapTimer();
-		for(String word : new WikipediaTitles()){
+		for(String word : WikipediaTitles.instance()){
 			trie.insert(word);
 			c++;
 			if(c == maxCount) break;

@@ -28,7 +28,7 @@ import org.trie4j.test.WikipediaTitles;
 public class SaveLOUDSTrie {
 	public static void main(String[] args) throws Exception{
 		TailPatriciaTrie trie1 = new TailPatriciaTrie();
-		for(String s : new WikipediaTitles("data/jawiki-20120220-all-titles-in-ns0.gz")){
+		for(String s : WikipediaTitles.instance()){
 			trie1.insert(s);
 		}
 		System.out.println(trie1.size() + "nodes.");
